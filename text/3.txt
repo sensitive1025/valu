@@ -1,0 +1,53 @@
+from random import randint
+import time
+
+N = int(input("생일 검사할 사람 수 (최대 100명) : "))
+
+# 각 달의 일 수
+months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+# 각 달의 이름
+month_name = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+epoch = 100000
+cnt = 0
+
+start = time.time()
+for e in range(epoch):
+    date = [randint(1, 365) for _ in range(N)]
+    date_str = []
+
+    for i in date:
+        for idx, j in enumerate(months):
+            i -= j
+            if i <= 0:
+                text = month_name[idx] + " " + str(i + j)
+                date_str.append(text)
+                break
+
+    if e == 1:
+        print(f"\n일부 {N}명의 생일은 다음과 같습니다. \n {date_str}\n")
+
+    showed = []
+    epoch_cnt = 0
+    for item in date_str:
+        if item in showed:
+            epoch_cnt += 1
+            if e == 1:
+                print(f"{item}", end=" ")
+        else:
+            showed.append(item)
+
+    if e == 1:
+        if epoch_cnt!= 0:
+            print("가 겹칩니다.", end="\n================\n")
+        else:
+            print("이 경우엔 생일이 겹치는 경우가 존재하지 않습니다.\n================\n")
+
+    if epoch_cnt!= 0:
+        cnt += 1
+    if (e + 1) % 10000 == 0:
+        print(f"{e+1}번째 시뮬레이션 중...")
+
+print(f'총 {cnt}번의 시행에서 생일이 겹치는 상황 확인')
+print(f"즉, {100 * cnt/epoch :.2f} %의 확률로 생일 같은 사람이 존재함")
+print(f"소요시간 : {time.time()-start :.2f} 초")

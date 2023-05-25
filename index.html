@@ -1,0 +1,36 @@
+<button type="button" class="b" onclick="clicked(1)"></button>
+<button type="button" class="b" onclick="clicked(2)"></button>
+<button type="button" class="b" onclick="clicked(3)"></button>
+<button type="button" class="b" onclick="clicked(4)"></button>
+<button type="button" class="b" onclick="clicked(5)"></button>
+<button type="button" class="b" onclick="clicked(6)"></button>
+<button type="button" class="b" onclick="clicked(7)"></button>
+<button type="button" class="b" onclick="clicked(8)"></button>
+<button type="button" class="b" onclick="clicked(9)"></button>
+<script>
+    function clicked(i) {
+        const xhr = new XMLHttpRequest();
+        var textc;
+
+        xhr.open('GET', 'text/' + i + '.txt', true);
+        xhr.send();
+        xhr.onload = function() {
+            const text = xhr.response;
+            console.log(text);
+
+            const ans = document.createElement("div");
+            const textE = document.createTextNode(text)
+            navigator.clipboard.writeText(text);
+            ans.appendChild(textE);
+            ans.setAttribute("id", "textArea");
+            document.body.appendChild(ans);
+            copy(ans);
+        };
+    }
+
+    function copy(content) {
+        console.log(content);
+
+        content.remove();
+    }
+</script>

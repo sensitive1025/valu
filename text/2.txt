@@ -1,0 +1,10 @@
+def find_factors(number):
+    factors = []
+    for i in range(1, number + 1):
+        if number % i == 0:
+            factors.append(i)
+    return factors
+
+# 예시 사용법
+result = find_factors(24)
+print(result)  # 출력: [1, 2, 3, 4, 6, 8, 12, 24]

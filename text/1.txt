@@ -1,0 +1,16 @@
+def collatz_conjecture(n):
+    sequence = [n]
+    
+    while n != 1:
+        if n % 2 == 0:  # n이 짝수인 경우
+            n = n // 2
+        else:  # n이 홀수인 경우
+            n = 3 * n + 1
+        sequence.append(n)
+    
+    return sequence
+
+number = int(input("자연수를 입력하세요: "))
+result = collatz_conjecture(number)
+print("순서:", result)
+print("길이:", len(result))

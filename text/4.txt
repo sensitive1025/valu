@@ -1,0 +1,18 @@
+import random
+
+def simulate_dice_rolling(num_rolls):
+    results = []
+    for _ in range(num_rolls):
+        roll = random.randint(1, 6)
+        results.append(roll)
+    return results
+
+# 주사위를 백만 번 굴리는 시뮬레이션 실행
+rolls = simulate_dice_rolling(1000000)
+
+# 각 주사위 눈의 빈도수 계산
+frequency = [rolls.count(i) for i in range(1, 7)]
+
+# 결과 출력
+for i, freq in enumerate(frequency, start=1):
+    print(f"주사위 눈 {i}: {freq}번")
